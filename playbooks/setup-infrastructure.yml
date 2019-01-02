@@ -13,6 +13,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+- name: Log Start Setup Infra
+  hosts: localhost
+  user: root
+  tasks:
+
+  - name: log1
+    syslogger:
+      msg: "Starting Setup Infra"
+
 - include: unbound-install.yml
 - include: repo-install.yml
   when: install_method == "source"
@@ -30,3 +39,12 @@
 - include: ceph-install.yml
 - include: rsyslog-install.yml
 - include: infra-journal-remote.yml
+
+- name: Log Stop Setup Infra
+  hosts: localhost
+  user: root
+  tasks:
+
+  - name: log2
+    syslogger:
+      msg: "Ending Setup Infra"

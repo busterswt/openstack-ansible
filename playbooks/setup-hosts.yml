@@ -13,6 +13,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+- name: Log Start Setup Hosts
+  hosts: localhost
+  user: root
+  tasks:
+
+  - name: log1
+    syslogger:
+      msg: "Starting Setup Hosts"
+
 - include: openstack-hosts-setup.yml
 - include: security-hardening.yml
 - include: containers-deploy.yml
+
+- name: Log Stop Setup Hosts
+  hosts: localhost
+  user: root
+  tasks:
+
+  - name: log2
+    syslogger:
+      msg: "Ending Setup Hosts"

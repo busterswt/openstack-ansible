@@ -13,6 +13,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+- name: Log Start Setup OpenStack
+  hosts: localhost
+  user: root
+  tasks:
+
+  - name: log1
+    syslogger:
+      msg: "Starting Setup OpenStack"
+
 - include: os-keystone-install.yml
 - include: os-barbican-install.yml
 - include: os-glance-install.yml
@@ -48,3 +57,11 @@
 - include: os-tempest-install.yml
   when: (tempest_install | default(False)) | bool or (tempest_run | default(False)) | bool
 
+- name: Log Stop Setup OpenStack
+  hosts: localhost
+  user: root
+  tasks:
+
+  - name: log2
+    syslogger:
+      msg: "Ending Setup OpenStack"
